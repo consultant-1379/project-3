@@ -1,0 +1,10 @@
+{
+  "app": {
+    "options": {},
+    "menu": {
+      "data": [
+        { "id": "APP_VIEW", "label": "APP_VIEW", "data": { "path": "app-view" } }
+      ]
+    }
+  }
+}

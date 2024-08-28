@@ -1,0 +1,21 @@
+{
+  "script":"app-view/AppView",
+  "title":"APP_VIEW",
+  "route":"app-view",
+  "localePath": "locale/",
+  "menu": {
+    "id": "APP_VIEW",
+    "data": {
+      "path": "app-view"
+    }
+  },
+  "dependencies": {
+    "@eui/component":"0.9.x",
+    "@eui/lit-component":"0.9.x",
+    "@eui/app":"0.9.x",
+    "@eui/base": "0.10.x",
+    "@eui/layout": "0.6.x",
+    "@eui/table": "0.8.x"
+  },
+  "components": {}
+}

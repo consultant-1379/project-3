@@ -1,0 +1,2 @@
+FROM oko/builder
+CMD ["java", "-jar", "/usr/src/app/target/oko-0.0.1-SNAPSHOT.jar"]

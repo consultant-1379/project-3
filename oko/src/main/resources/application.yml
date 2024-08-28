@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active: dev
+
+
+---
+spring:
+  profiles: dev
+  name: dev-yml-config
+  jpa:
+    hibernate:
+      ddl-auto: create-drop #use a fresh DB each time we run in dev
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+    database-platform: "org.hibernate.dialect.H2Dialect"
+  datasource:
+    url: "jdbc:h2:mem:dev_db"
+    driverClassName: org.h2.Driver
+    username: "dev"
+    password: "password"
+server:
+  port: 8080
+
+
+---
+spring:
+  profiles: prod
+  name: prod-yml-config
+  jpa:
+    hibernate:
+      ddl-auto: update #update the prod DB to match the application schema
+    properties: #No need to show all this information in prod, normally
+      hibernate:
+        show_sql: false
+        use_sql_comments: false
+        format_sql: false
+  datasource:
+#The following lines constrain the docker-compose file for oko fairly tightly:
+#the docker-compose file must define a "mysql" service to allow for automatic service discovery on docker-compose up
+#The mysql service must have a database called "oko", and the user "oko" with password "oko_pass" must have sufficient
+#access permissions to execute all necessary SQL statements on the "oko" db (CREATE, UPDATE, INSERT etc)
+    url: "jdbc:mysql://mysql:3306/oko"
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: "oko"
+    password: "oko_pass" #if we weren't deploying the mysql server inside a docker network this would have to be secret
+#docker-compose does not promise the mysql container will be lanuched before oko, so oko needs to retry connecting to mysql
+#HikariCP is the jdbc connection pool spring uses, config option details: https://github.com/brettwooldridge/HikariCP#infrequently-used
+    hikari:
+#Wait two minutes for mysql to start up before failing
+      initializationFailTimeout: 120000
+
+server:
+  port: 80

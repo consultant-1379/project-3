@@ -1,0 +1,15 @@
+#This dockefile exists because the datasource dependency of the application
+#might cause it to fail tests when being built even if it shouldn't.
+#Tests should be run using docker compose to bring up a SQL server before
+#running mvn test
+FROM maven:3-openjdk-14
+
+RUN mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app
+
+ONBUILD ADD . /usr/src/app
+
+ONBUILD RUN mvn install -DskipTests
+
+CMD ["java", "-jar", "/usr/src/app/target/oko-0.0.1-SNAPSHOT.jar"]

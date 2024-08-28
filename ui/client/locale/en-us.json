@@ -1,0 +1,9 @@
+{
+  "CONTAINER_TITLE": "OKO Application Monitoring",
+  "CONTAINER_TITLE_SHORT": "OKO",
+  "MENU_TITLE": "Menu",
+  "MENU": {
+    "APP_1": "App One",
+    "APP_VIEW": "Applications"
+  }
+}

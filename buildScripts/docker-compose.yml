@@ -1,0 +1,25 @@
+version: "3"
+services: 
+    oko:
+        build:
+            context: ../oko
+            dockerfile: ../buildScripts/Dockerfile-compose-build
+        environment: 
+            spring_profiles_active: prod
+        ports: 
+        - "8080:80"
+        links:
+        - mysql
+    mysql:
+        image: mysql:latest
+#This probably shouldn't dump the prod mysql DB into
+#the composers home directory, but also, I don't know
+#where else I can put it in a cross-platform manner
+#        volumes:
+#            - ~/mysql_data:/var/lib/mysql
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+#The following must align with the configuration in oko's application.yml
+            MYSQL_DATABASE: oko
+            MYSQL_USER: oko
+            MYSQL_PASSWORD: oko_pass

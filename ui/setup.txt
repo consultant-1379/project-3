@@ -1,0 +1,5 @@
+npm config set @eui:registry https://arm.lmera.ericsson.se/artifactory/api/npm/proj-e-uisdk-npm-local/
+npm config set @eds:registry https://arm.rnd.ki.sw.ericsson.se/artifactory/api/npm/proj-eds-npm-local/
+
+npm config set proxy=null
+npm config set https-proxy=null
